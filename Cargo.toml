@@ -2,6 +2,7 @@
 name    = "korvo-voice-assistant"
 version = "0.0.0"
 edition = "2024"
+authors = ["Sergio Gasquez <sergio.gasquez@gmail.com>"]
 publish = false
 
 [dependencies]
