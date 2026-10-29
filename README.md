@@ -8,7 +8,7 @@ transcribes the recording, [Claude](https://www.anthropic.com/api) answers, and 
 the answer are shown on the screen.
 
 The esp-hal crates are pinned to a commit that fixes stale pixels at the start of DPI frames. The
-ES8389 codec is configured with the [es8389](https://github.com/SergioGasquez/es8389) driver.
+ES8389 codec is configured with the [es8389](https://crates.io/crates/es8389) driver.
 
 ## Hardware
 

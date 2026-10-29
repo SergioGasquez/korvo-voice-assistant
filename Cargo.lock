@@ -995,7 +995,8 @@ checksum = "00d174d5400e5e8fd687ad1049e2f578285fa914201b1af7e8b112a4546bd826"
 [[package]]
 name = "es8389"
 version = "0.1.0"
-source = "git+https://github.com/SergioGasquez/es8389#04071cbfaa54a641190bd1b75c011a459ec94a4f"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "17fee78989eb0c1f5d2700adac3df9264e8848d94d47ed58876ce07c0651c3ab"
 dependencies = [
  "embedded-hal-async",
 ]
