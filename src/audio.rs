@@ -10,12 +10,15 @@ use embassy_sync::{
     channel::Channel,
     signal::Signal,
 };
-use embassy_time::Duration;
+use embassy_time::{Duration, Timer};
+use es8389::{Clock, Es8389, Format, MicGain, WordLength};
 use esp_alloc::ExternalMemory;
 use esp_hal::{
+    Async,
     dma_rx_stream_buffer,
     dma_tx_stream_buffer,
     gpio::AnyPin,
+    i2c::master::{self, I2c},
     i2s::master::{Channels, DataFormat, I2s, TdmConfig},
     peripherals::{DMA_CH0, I2S0},
     time::Rate,
@@ -51,6 +54,36 @@ pub async fn start_recording() {
 pub async fn stop_recording() -> Samples {
     COMMANDS.send(Command::StopRecording).await;
     RECORDING.wait().await
+}
+
+/// Configures the ES8389 codec for the I2S bus of [`run`].
+///
+/// The codec drops into analog standby without BCLK, so [`run`] must already be clocking.
+pub async fn init_codec(i2c: &mut I2c<'_, Async>) -> Result<(), es8389::Error<master::Error>> {
+    let mut codec = Es8389::new(i2c, es8389::DEFAULT_ADDRESS);
+    // The first transfer after power-up is sometimes not acknowledged.
+    let mut attempt = 1;
+    let id = loop {
+        match codec.chip_id().await {
+            Ok(id) => break id,
+            Err(error) if attempt == 3 => return Err(error.into()),
+            Err(_) => attempt += 1,
+        }
+        Timer::after_millis(10).await;
+    };
+    log::info!("ES8389 chip ID: {id:02x?}");
+
+    codec
+        .init(es8389::Config {
+            // Two 32-bit slots per frame, see `run`.
+            clock: Clock::Bclk(2 * 32 * I2S_SAMPLE_RATE),
+            sample_rate: I2S_SAMPLE_RATE,
+            format: Format::I2s,
+            word_length: WordLength::Bits16,
+            dac_reference: false,
+        })
+        .await?;
+    Ok(codec.set_mic_gain(MicGain::Db30_5).await?)
 }
 
 enum State {

@@ -993,6 +993,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "00d174d5400e5e8fd687ad1049e2f578285fa914201b1af7e8b112a4546bd826"
 
 [[package]]
+name = "es8389"
+version = "0.1.0"
+source = "git+https://github.com/SergioGasquez/es8389#04071cbfaa54a641190bd1b75c011a459ec94a4f"
+dependencies = [
+ "embedded-hal-async",
+]
+
+[[package]]
 name = "esp-alloc"
 version = "0.11.0"
 source = "git+https://github.com/SergioGasquez/esp-hal?rev=c5052fded307ce323d99384074ef108860f4389b#c5052fded307ce323d99384074ef108860f4389b"
@@ -1811,6 +1819,7 @@ dependencies = [
  "embedded-io-async 0.7.0",
  "embedded-text",
  "embedded-tls",
+ "es8389",
  "esp-alloc",
  "esp-backtrace",
  "esp-bootloader-esp-idf",

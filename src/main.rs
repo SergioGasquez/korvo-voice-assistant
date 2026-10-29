@@ -22,7 +22,6 @@ extern crate alloc;
 mod api;
 mod audio;
 mod display;
-mod es8389;
 mod touch;
 
 use alloc::{format, string::String};
@@ -171,7 +170,7 @@ async fn main(spawner: Spawner) -> ! {
         .with_sda(peripherals.GPIO0)
         .with_scl(peripherals.GPIO1)
         .into_async();
-    es8389::init(&mut i2c).await.unwrap();
+    audio::init_codec(&mut i2c).await.unwrap();
 
     spawner.spawn(touch::run(i2c).unwrap());
 
