@@ -7,9 +7,8 @@ Tap the button on the screen and speak, then tap it again. [Deepgram](https://de
 transcribes the recording, [Claude](https://www.anthropic.com/api) answers, and the question and
 the answer are shown on the screen.
 
-Migrated from the example in [esp-rs/esp-hal#6610](https://github.com/esp-rs/esp-hal/pull/6610).
-Until that PR is merged, the esp-hal crates are pinned to its branch, because it also fixes stale
-pixels at the start of DPI frames.
+The esp-hal crates are pinned to a commit that fixes stale pixels at the start of DPI frames. The
+ES8389 codec is configured with the [es8389](https://github.com/SergioGasquez/es8389) driver.
 
 ## Hardware
 
