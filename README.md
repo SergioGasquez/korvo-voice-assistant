@@ -1,4 +1,4 @@
-# korvo-voice
+# korvo-voice-assistant
 
 A voice assistant for the ESP32-S31-Korvo-1 with the 4.3" LCD sub-board, written in Rust with
 [esp-hal](https://github.com/esp-rs/esp-hal) and Embassy.

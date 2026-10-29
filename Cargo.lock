@@ -1805,7 +1805,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "korvo-voice"
+name = "korvo-voice-assistant"
 version = "0.0.0"
 dependencies = [
  "allocator-api2",
