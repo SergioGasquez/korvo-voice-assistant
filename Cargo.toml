@@ -32,8 +32,7 @@ serde = { version = "1.0.228", default-features = false, features = ["alloc", "d
 serde_json = { version = "1.0.145", default-features = false, features = ["alloc"] }
 static_cell = "2.1.0"
 
-# The esp-hal crates come from https://github.com/esp-rs/esp-hal/pull/6610, which fixes stale
-# pixels at the start of DPI frames.
+# The esp-hal crates are pinned to a commit that fixes stale pixels at the start of DPI frames.
 [dependencies.esp-alloc]
 git = "https://github.com/SergioGasquez/esp-hal"
 rev = "c5052fded307ce323d99384074ef108860f4389b"
